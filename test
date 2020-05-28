@@ -1,0 +1,100 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+struct book_database
+{
+  char book_name[50];
+  char author[50];
+  char issue_num[50];
+};
+
+int main ()
+{
+ //Book database, can be made a different function if required
+ struct book_database a[5] = {
+    {"conceptofphysics", "hcv", "3412"},	
+    {"conceptofphysics2", "hcv", "5648"},
+    {"calculus", "thomas", "1112"},
+    {"datascience", "joel", "9860"},
+    {"cleancode", "robert", "4723"}
+  };
+  char book_inp[50], author_inp[50], issue_inp[50];
+  int i, j;
+  i = j = 0;
+  printf ("\nWelcome to the book management menu\n");
+  while (j != 4)
+    {
+      printf ("\n1. Search the book by a given author\n");
+      printf ("2. Search the book by title name\n");
+      printf ("3. Search the book by issue number\n");
+      printf ("4. Exit menu\n");
+
+      printf ("\n\nSelect any one of the above options : ");
+      scanf ("%d", &j);
+
+      switch (j)
+	{
+
+	case 1:		//searching the title using author name
+	  printf ("Enter author name : ");
+	  scanf ("%s", author_inp);
+	  printf
+	    ("\nList of the books of the selected author are given below:\n");
+	  for (i = 0; i < 5; i++)
+	    {
+	      if (strcmp (author_inp, a[i].author) == 0)
+		printf ("\n %s \n", a[i].book_name);
+	    }
+	  if (strcmp (author_inp, a[0].author) != 0     //This step is for input validation incase the book user is looking for is unavailable
+	      && strcmp (author_inp, a[1].author) != 0
+	      && strcmp (author_inp, a[2].author) != 0
+	      && strcmp (author_inp, a[3].author) != 0
+	      && strcmp (author_inp, a[4].author) != 0)
+	    printf ("\nBook not available for the selected author\n");
+	  break;
+
+	case 2:		//searching the title using book title
+	  printf ("Enter book name : ");
+	  scanf ("%s", book_inp);
+	  for (i = 0; i < 5; i++)
+	    {
+	      if (strcmp (book_inp, a[i].book_name) == 0)
+		printf
+		  ("\n Book available as per the selected title is given below : \n %s \n",
+		   a[i].book_name);
+	    }
+	  if (strcmp (book_inp, a[0].book_name) != 0
+	      && strcmp (book_inp, a[1].book_name) != 0
+	      && strcmp (book_inp, a[2].book_name) != 0
+	      && strcmp (book_inp, a[3].book_name) != 0
+	      && strcmp (book_inp, a[4].book_name) != 0)
+	    printf ("\nNo book is available for the selected title\n");
+	  break;
+
+	case 3:		//searching the title using issue number
+	  printf ("Enter book issue number : ");
+	  scanf ("%s", issue_inp);
+	  for (i = 0; i < 5; i++)
+	    {
+	      if (strcmp (issue_inp, a[i].issue_num) == 0)
+		printf
+		  ("\n Book available as per the selected issue number is given below : \n %s \n",
+		   a[i].book_name);
+	    }
+	  if (strcmp (issue_inp, a[0].issue_num) != 0
+	      && strcmp (issue_inp, a[1].issue_num) != 0
+	      && strcmp (issue_inp, a[2].issue_num) != 0
+	      && strcmp (issue_inp, a[3].issue_num) != 0
+	      && strcmp (issue_inp, a[4].issue_num) != 0)
+	    printf ("\nNo book is available for the given issue number\n");
+	  break;
+
+	case 4:
+	  exit (0);
+
+	}
+    }
+  return 0;
+
+}
